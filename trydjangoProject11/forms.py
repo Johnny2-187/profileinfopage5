@@ -25,7 +25,8 @@ class SignInForm(forms.Form):
     password = forms.CharField(max_length=255, widget=forms.PasswordInput)
 
 
+
 class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['full_name', 'username', 'contact_number', 'address', 'password']  # Add the fields you want to update
+        fields = ['full_name', 'contact_number', 'address', 'username', 'password']

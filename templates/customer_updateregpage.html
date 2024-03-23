@@ -94,38 +94,62 @@
       margin-left: auto;
     }
   </style>
+     <script>
+    function validateForm() {
+      var password = document.getElementById("password").value;
+      var confirmPassword = document.getElementById("confirmpassword").value;
+      if (password !== confirmPassword) {
+        alert("Passwords do not match.");
+        return false;
+      }
+      return true;
+    }
+
+    function togglePasswordVisibility(fieldId) {
+      var passwordField = document.getElementById(fieldId);
+      if (passwordField.type === "password") {
+        passwordField.type = "text";
+      } else {
+        passwordField.type = "password";
+      }
+    }
+  </script>
 </head>
 <body>
   <div class="container">
     <div class="header">
       <p>Rocket Basket: Shop Fast, Ship Faster - Customer Information Update </p>
     </div>
-    <form method="POST">
+    <form method="POST" onsubmit="return validateForm();">
         {% csrf_token %}
       <div class="form-container">
         <div class="form-group">
           <label for="fullname">Full Name</label>
-           <input type="text" id="fullname" name="full_name" value="{{ form.full_name.value }}">
+           <input type="text" id="fullname" name="full_name" value="{{ form.full_name.value }}" required>
         </div>
         <div class="form-group">
           <label for="username">Username</label>
-         <input type="text" id="username" name="username" value="{{ form.username.value }}" disabled>
+         <input type="text" id="username" name="username" value="{{ form.username.value }}" required>
         </div>
         <div class="form-group">
           <label for="contactnumber">Contact Number</label>
-            <input type="text" id="contactnumber" name="contact_number" value="{{ form.contact_number.value }}">
+            <input type="text" id="contactnumber" name="contact_number" value="{{ form.contact_number.value }}" required>
         </div>
         <div class="form-group">
           <label for="password">Password</label>
-          <input type="password" id="password">
+          <input type="password" id="password" name="password" value="{{ form.password.value }}" required>
+          <button type="button" onclick="togglePasswordVisibility('password');">Show Password</button>
+
         </div>
         <div class="form-group">
           <label for="address">Address</label>
-          <input type="text" id="address" name="address" value="{{ form.address.value }}">
+          <input type="text" id="address" name="address" value="{{ form.address.value }}" required>
         </div>
-        <div class="form-group">
+         <div class="form-group">
           <label for="confirmpassword">Confirm Password</label>
-          <input type="password" id="confirmpassword">
+          <input type="password" id="confirmpassword" required>
+          <button type="button" onclick="togglePasswordVisibility('confirmpassword');">Show Password</button>
+
         </div>
       </div>
                <div style="text-align: center;">
